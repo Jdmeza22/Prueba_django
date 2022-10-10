@@ -1,0 +1,34 @@
+{% extends "./plantilla.html" %}
+{% block title %}Gestion de Empleados{% endblock %}
+{% block body %}
+<div class="row">
+    <div class="col-md-4 offset-med-4">
+        <h2>Edición de Empleados</h2>
+    <div class="card">
+        <div class="card-body">
+            <form action="/editarEmpleado/" method="POST">{%csrf_token %}
+                <div class="form-group">
+                    <input type="text" id="txtcedula" name="txtcedula" class="form-control" placeholder="Cedula" value="{{trabajadores.cedula}}" minlength="5" maxlength="10" readonly required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="txtnombre" name="txtnombre" class="form-control" placeholder="Nombre" value="{{trabajadores.nombre}}"  minlength="3" maxlength="15" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="txtnumero_Celular" name="txtnumero_Celular" class="form-control" placeholder="Numero Celular" value="{{trabajadores.numero_Celular}}"  minlength="5" maxlength="10" required>
+                </div>
+                <div class="form-group">
+                    <input type="date" id="txtfecha_Nacimiento" name="txtfecha_Nacimiento" class="form-control" placeholder="Fecha Nacimiento" value="{{trabajadores.fecha_Nacimiento}}"  minlength="5" maxlength="10" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="txtcorreo" name="txtcorreo" class="form-control" placeholder="Correo Electronico" value="{{trabajadores.correo}}"  minlength="5" maxlength="30" required>
+                </div>
+                 <div class="form-group">
+                    <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                 </div>
+            </form>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+{% endblock %}

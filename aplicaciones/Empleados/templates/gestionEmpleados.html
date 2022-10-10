@@ -1,0 +1,71 @@
+{% extends "./plantilla.html" %}
+{% block title %}Gestion de Empleados{% endblock %}
+{% block body %}
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+    {% if message %}
+    {% for message in messages %}
+    <div class="alert alert-dismissable alert-success">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong class="text-dark">{{ message}}</strong>
+    </div>
+    {% endfor %}
+    {% endif %}
+    <h2>Gestion Empleados</h2>
+    <div class="card">
+        <div class="card-body">
+            <form action="/registrarEmpleado/" method="POST">{%csrf_token %}
+                <div class="form-group">
+                    <input type="text" id="txtcedula" name="txtcedula" class="form-control" placeholder="Cedula" minlength="5" maxlength="10" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="txtnombre" name="txtnombre" class="form-control" placeholder="Nombre" minlength="3" maxlength="15" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="txtnumero_Celular" name="txtnumero_Celular" class="form-control" placeholder="Numero Celular" minlength="5" maxlength="10" required>
+                </div>
+                <div class="form-group">
+                    <input type="date" id="txtfecha_Nacimiento" name="txtfecha_Nacimiento" class="form-control" placeholder="Fecha Nacimiento" minlength="5" maxlength="10" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="txtcorreo" name="txtcorreo" class="form-control" placeholder="Correo Electronico" minlength="5" maxlength="30" required>
+                </div>
+                 <div class="form-group">
+                    <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                 </div>
+            </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-9">
+        <h1>Listado de Empleados</h1>
+        <div class="table-responsive py-2">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Cedula</th>
+                        <th>Numero Celular</th>
+                        <th>Fecha Nacimiento</th>
+                        <th>Correo</th>
+                        <th colspan="2">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for t in trabajadores %}
+                    <tr>
+                        <td>{{t.nombre}}</td>
+                        <td>{{t.cedula}}</td>
+                        <td>{{t.numero_celular}}</td>
+                        <td>{{t.fecha_nacimiento}}</td>
+                        <td>{{t.correo}}</td>
+                        <td><a href="edicionEmpleado/{{t.cedula}}" class="btn btn-info">Editar</a></td>
+                        <td><a href="eliminarEmpleado/{{t.cedula}}" class="btn btn-danger btnEliminar">Eliminar</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
